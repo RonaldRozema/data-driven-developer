@@ -1,1 +1,42 @@
-{% extends 'bulma/base.html' %} {% block heading %} {% endblock heading %} {% block content %} {% endblock content %} {% block footer %} {% endblock footer %}
+{% extends 'bulma/base.html' %}
+
+<div class="section">
+
+    <div class="container">
+
+        {% block header %}
+        <div class="container">
+            <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+                <div class="navbar-menu is-active">
+                    <div class="navbar-start">
+                        <a class="navbar-item">
+                            Home
+                        </a>
+                        <a class="navbar-item">
+                            Blog
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        {% endblock %}
+
+    </div>
+
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+
+    {% block footer %}
+    <div class="container">
+        <footer class="footer">
+            <div class="container">
+                <div class="content has-text-centered">
+                    &copy; Copyright Ronald Rozema
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% endblock %}
+
+</div>

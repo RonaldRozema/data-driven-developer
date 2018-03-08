@@ -1,11 +1,16 @@
-{% extends 'base.html' %} {% block heading %}
-<h1>Laatste blog posts</h1>
-{% endblock heading %} {% block content %}
+{% extends "base.html" %} {% block content %}
 
-<ul>
+<div class="container">
     {% for post in post_list %}
-    <li>{{ post.title }}</li>
+    <div class="box">
+        <div class="content">
+            <p>
+                <strong>{{ post.title }}</strong>
+                <br /> {{ post.content|truncatechars:"250" }}
+            </p>
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
 
-{% endblock content %}
+{% endblock %}
