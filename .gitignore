@@ -1,0 +1,5 @@
+*.pyc
+.vscode
+.sfdx
+db.sqlite3
+__pycache__
