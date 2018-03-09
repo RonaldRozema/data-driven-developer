@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView
 from django.db.models.functions import TruncMonth
 from django.db.models import Count
+from django.views.generic import ListView, DetailView
+
 from datetime import date
 
 from blog.models import Post
