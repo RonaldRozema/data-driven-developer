@@ -8,7 +8,7 @@ class PostList(ListView):
     context_object_name = 'post_list'
 
     def get_queryset(self):
-        return Post.objects.order_by('-publish_date')[:5]
+        return Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-publish_date')[:5]
 
 
 class PostDetail(DetailView):
