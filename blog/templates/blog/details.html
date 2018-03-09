@@ -7,8 +7,19 @@
         <p>
             {{ object.content }}
         </p>
+        <p>
+            <small>{{ object.times_viewed }} times viewed</small>
+        </p>
     </div>
     <div class="col sm12 m3">
+        <div class="section">
+            {% for tag in object.tags.all %}
+            <div class="chip">
+                {{ tag.name }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="divider"></div>
         <div class="section">
             <p>
                 Written by: {{ object.author.username }}
@@ -16,14 +27,6 @@
             <p>
                 Posted on: {{ object.publish_date }}
             </p>
-        </div>
-        <div class="divider"></div>
-        <div class="section">
-            {% for tag in object.tags.all %}
-            <div class="chip">
-                {{ tag.name }}
-            </div>
-            {% endfor %}
         </div>
     </div>
 </div> {% endblock %}

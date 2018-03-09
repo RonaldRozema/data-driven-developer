@@ -15,3 +15,10 @@ class PostDetail(DetailView):
 
     template_name = 'blog/details.html'
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data(**kwargs)
+        obj = self.get_object()
+        obj.times_viewed = obj.times_viewed + 1
+        obj.save()
+        return context

@@ -21,6 +21,7 @@ class Post(models.Model):
     amount_upvotes = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag)
     is_removed = models.BooleanField(default=False)
+    times_viewed = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
