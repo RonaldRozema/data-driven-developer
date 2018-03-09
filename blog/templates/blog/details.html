@@ -18,5 +18,12 @@
             </p>
         </div>
         <div class="divider"></div>
+        <div class="section">
+            {% for tag in object.tags.all %}
+            <div class="chip">
+                {{ tag.name }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div> {% endblock %}

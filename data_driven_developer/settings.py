@@ -39,12 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'django_comments',
-    'mptt',
-    'tagging',
-    'zinnia'
 ]
 
 MIDDLEWARE = [
@@ -70,8 +65,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.i18n',
-                'zinnia.context_processors.version'
             ],
         },
     },
@@ -132,5 +125,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '__shared__'),
 ]
-
-SITE_ID = 1
