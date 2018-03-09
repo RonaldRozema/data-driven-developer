@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bulma',
+    'material',
+    'material.frontend',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
