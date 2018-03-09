@@ -5,12 +5,18 @@
         {% for post in post_list %}
         <div class="card">
             <div class="card-content">
-                <p>
-                    <span class="card-title">{{ post.title }}</span>
-                    <p>
-                        {{ post.content|truncatechars:"250" }}
-                    </p>
-                </p>
+                <div class="row">
+                    <div class="col s9 m9">
+                        <span class="card-title">{{ post.title }}</span>
+                        <p>
+                            {{ post.content|truncatechars:"250" }}
+                        </p>
+                    </div>
+                    <div class="col s3 m3">
+                        Posted on: {{ post.publish_date }}
+                        <br /> Written by: {{ post.author.username }}
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
