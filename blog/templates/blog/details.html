@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title %} {{ object.title }} {% endblock %} {% block content %}
+<div class="row">
+    <div class="col sm12 m9">
+        <h3>
+            {{ object.title }}
+        </h3>
+        <p>
+            {{ object.content }}
+        </p>
+    </div>
+    <div class="col sm12 m3">
+        <div class="section">
+            <p>
+                Written by: {{ object.author.username }}
+            </p>
+            <p>
+                Posted on: {{ object.publish_date }}
+            </p>
+        </div>
+        <div class="divider"></div>
+    </div>
+</div> {% endblock %}
