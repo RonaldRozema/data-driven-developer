@@ -14,7 +14,31 @@
                         </p>
                     </div>
                     <div class="col s3 m3">
-                        Posted on: {{ post.publish_date }}
+                        {{ post.times_viewed }} times viewed
+                        <br /> Posted on: {{ post.publish_date | date:"SHORT_DATE_FORMAT" }}
+                        <br /> Written by: {{ post.author.username }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col s12 m12">
+        <h5>Popular posts</h5>
+        {% for post in popular_post_list %}
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s9 m9">
+                        <span class="card-title"><a href="{% url 'blog_details' pk=post.id %}">{{ post.title }}</a></span>
+                        <p>
+                            {{ post.content|truncatechars:"250" }}
+                        </p>
+                    </div>
+                    <div class="col s3 m3">
+                        {{ post.times_viewed }} times viewed
+                        <br /> Posted on: {{ post.publish_date | date:"SHORT_DATE_FORMAT" }}
                         <br /> Written by: {{ post.author.username }}
                     </div>
                 </div>
@@ -23,5 +47,16 @@
         {% endfor %}
     </div>
 </div>
+
+{% endblock %} {% block side-content %}
+
+<div class="section">
+    <h6>Archive</h6>
+    <div class="collection">
+        {% for date in archive_list %}
+        <a href="{% url 'archive_list' month=date.month.month year=date.month.year %}" class="collection-item">{{ date.month | date:'F Y' }} ({{ date.c }})</a> {% endfor %}
+    </div>
+</div>
+<div class="divider"></div>
 
 {% endblock %}
