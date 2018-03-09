@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+    {% include 'material/includes/material_css.html' %}
+    <script src="{% static 'material/js/jquery.js' %}"></script>
+    {% include 'material/includes/material_js.html' %}
+</head>
+
+<body>
+
+    <div class="container">
+
+        {% block header %}
+        <nav>
+            <div class="nav-wrapper">
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">About me</a></li>
+                    <li><a href="#">CV</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% endblock %}
+
+    </div>
+
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+
+    {% block footer %}
+    <div class="container">
+        <footer class="page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    &copy; 2018 Ronald Rozema
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
