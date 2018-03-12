@@ -40,7 +40,7 @@ class PostDetail(DetailView, FormView):
 
     def form_valid(self, form):
         post = self.get_object()
-        comment = Comment(content=form.cleaned_data['content'], author=User.objects.get(pk=1), post=post)
+        comment = Comment(content=form.cleaned_data['content'], author=User.objects.get(username='anonymous'), post=post)
         comment.save()
         post.comment_set.add(comment)
         post.save()
