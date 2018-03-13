@@ -1,13 +1,16 @@
 from django.contrib.auth.models import User
 from django.db.models.functions import TruncMonth
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, FormView, CreateView
 
 from datetime import date
+from functools import reduce
 
 from blog.models import Post, Comment
-from blog.forms import CommentForm
+from blog.forms import CommentForm, SearchForm
+
+import operator
 
 
 class PostList(ListView):
@@ -64,4 +67,22 @@ class ArchiveList(ListView):
         context = super(ArchiveList, self).get_context_data(*args, **kwargs)
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         context['date'] = date(year=self.kwargs['year'], month=self.kwargs['month'], day=1)
+        return context
+
+class SearchList(ListView):
+
+    model = Post
+    template_name = 'blog/search.html'
+
+    def get_queryset(self):
+        search_string = self.request.GET['search']
+        if search_string != '':
+            return Post.objects.filter(content__icontains=search_string, is_draft=False, is_removed=False, is_public=True)
+        return Post.objects.all()
+        
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchList, self).get_context_data(*args, **kwargs)
+        context['search_result_count'] = self.get_queryset().count();
+        context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         return context
