@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block title %} {{ object.title }} {% endblock %} {% block content %}
+<div class="row">
+    <div class="col sm12 m12">
+        <h3>
+            {{ object.title }}
+        </h3>
+        <p>
+            {{ object.content }}
+        </p>
+        <p>
+            <small>{{ object.times_viewed }} times viewed</small>
+        </p>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="row">
+    <div class="col sm12 m12">
+        <h6>Comments</h6>
+        {% for comment in object.comment_set.all %}
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content">
+                        {{ comment.content }}
+                        <br /><small>commented by {{ comment.author.username }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12 m12">
+                <form action="{% url 'blog_details' pk=object.id %}" method="post">
+                    {% csrf_token %}
+                    <input placeholder="Comment.." name="content" type="text" class="validate">
+                    <input type="submit" value="Add comment" class="btn" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %} {% block side-content %}
+
+<div class="col sm12 m12">
+    <div class="section">
+        {% for tag in object.tags.all %}
+        <div class="chip">
+            {{ tag.name }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <p>
+            Written by: {{ object.author.username }}
+        </p>
+        <p>
+            Posted on: {{ object.publish_date }}
+        </p>
+    </div>
+</div>
+
+{% endblock %}
