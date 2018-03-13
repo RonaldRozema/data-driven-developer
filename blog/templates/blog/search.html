@@ -1,9 +1,8 @@
-{% extends "base.html" %} {% block title %} archive {% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %} blog {% endblock %} {% block content %}
 
 <div class="row">
     <div class="col s12 m12">
-        <h5>Archive {{ date | date:'F Y'}}</h5>
-        {% for post in post_list %}
+        <h5>Search results</h5> <small>{{ search_result_count }} post(s) found</small> {% for post in object_list %}
         <div class="card">
             <div class="card-content">
                 <div class="row">
@@ -39,7 +38,7 @@
     <h6>Archive</h6>
     <div class="collection">
         {% for date in archive_list %}
-        <a href="#" class="collection-item">{{ date.month | date:'F Y' }} ({{ date.c }})</a> {% endfor %}
+        <a href="{% url 'archive_list' month=date.month.month year=date.month.year %}" class="collection-item">{{ date.month | date:'F Y' }} ({{ date.c }})</a> {% endfor %}
     </div>
 </div>
 <div class="divider"></div>

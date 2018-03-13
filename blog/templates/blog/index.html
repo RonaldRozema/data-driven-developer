@@ -51,6 +51,14 @@
 {% endblock %} {% block side-content %}
 
 <div class="section">
+    <form action="{% url 'search' %}" method="get">
+        {% csrf_token %}
+        <input placeholder="Search" name="search" type="text" class="validate">
+        <input type="submit" value="Find" class="btn" />
+    </form>
+</div>
+<div class="divider"></div>
+<div class="section">
     <h6>Archive</h6>
     <div class="collection">
         {% for date in archive_list %}
