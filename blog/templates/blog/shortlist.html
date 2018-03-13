@@ -21,19 +21,30 @@
                 </div>
             </div>
         </div>
-        {% endfor %} {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="/posts?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span> {% if page_obj.has_next %}
-            <a href="/posts?page={{ page_obj.next_page_number }}">next</a> {% endif %}
-            </span>
+        {% endfor %}
+    </div>
+
+    <div class="col s12 m12">
+        <h5>Popular posts</h5>
+        {% for post in popular_post_list %}
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s9 m9">
+                        <span class="card-title"><a href="{% url 'blog_details' pk=post.id %}">{{ post.title }}</a></span>
+                        <p>
+                            {{ post.content|truncatechars:"250" }}
+                        </p>
+                    </div>
+                    <div class="col s3 m3">
+                        {{ post.times_viewed }} times viewed
+                        <br /> Posted on: {{ post.publish_date | date:"SHORT_DATE_FORMAT" }}
+                        <br /> Written by: {{ post.author.username }}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endif %}
+        {% endfor %}
     </div>
 </div>
 
