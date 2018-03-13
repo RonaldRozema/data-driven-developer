@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.db.models.functions import TruncMonth
 from django.db.models import Count, Q
 from django.urls import reverse_lazy
@@ -13,17 +14,32 @@ from blog.forms import CommentForm, SearchForm
 import operator
 
 
-class PostList(ListView):
+class PostShortList(ListView):
 
-    template_name='blog/index.html'
+    template_name='blog/shortlist.html'
     context_object_name = 'post_list'
 
     def get_queryset(self):
         return Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-publish_date')[:5]
 
     def get_context_data(self, *args, **kwargs):
-        context = super(PostList, self).get_context_data(*args, **kwargs)
+        context = super(PostShortList, self).get_context_data(*args, **kwargs)
         context['popular_post_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-times_viewed')[:5]
+        context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
+        return context
+
+class PostList(ListView):
+    
+    template_name='blog/index.html'
+    context_object_name = 'post_list'
+    paginate_by = 2
+
+    def get_queryset(self):
+        return Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-publish_date')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostList, self).get_context_data(*args, **kwargs)
+        paginator = Paginator(self.get_queryset(), self.paginate_by)
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         return context
 
