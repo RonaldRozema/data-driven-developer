@@ -1,15 +1,18 @@
 {% extends 'base.html' %} {% block title %} {{ object.title }} {% endblock %} {% block content %}
 <div class="row">
     <div class="col sm12 m12">
-        <h3>
-            {{ object.title }}
-        </h3>
-        <p>
-            {{ object.content | safe }}
-        </p>
-        <p>
-            <small>{{ object.times_viewed }} times viewed</small>
-        </p>
+        <h5>{{ object.title }}</h5>
+        <div class="card">
+            <div class="card-content">
+                <p> {{ object.content | safe }}
+                </p>
+                <br />
+                <div class="divider"></div>
+                <p>
+                    <small>{{ object.times_viewed }} times viewed</small>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="divider"></div>
