@@ -5,7 +5,7 @@
             {{ object.title }}
         </h3>
         <p>
-            {{ object.content }}
+            {{ object.content | safe }}
         </p>
         <p>
             <small>{{ object.times_viewed }} times viewed</small>
