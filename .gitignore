@@ -3,3 +3,4 @@
 .sfdx
 db.sqlite3
 __pycache__
+__shared__/static/
