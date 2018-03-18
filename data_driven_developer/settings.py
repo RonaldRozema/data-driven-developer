@@ -129,6 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '__shared__'),
 ]
 
-MEDIA_URL = '/media/'
-CKEDITOR_UPLOAD_PATH = 'ddd/uploads/'
-CKEDITOR_IMAGE_BACKEND = 'pillow'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = "/media/"
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+# CKEDITOR_IMAGE_BACKEND = 'pillow'
