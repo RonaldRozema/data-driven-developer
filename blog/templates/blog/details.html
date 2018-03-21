@@ -34,7 +34,7 @@
         <div class="divider"></div>
         <div class="row">
             <div class="col s12 m12">
-                <form action="{% url 'blog_details' pk=object.id %}" method="get">
+                <form action="{% url 'blog_details' pk=object.id %}" method="post">
                     {% csrf_token %}
                     <input placeholder="Comment.." name="content" type="text" class="validate">
                     <input type="submit" value="Add comment" class="btn" />
