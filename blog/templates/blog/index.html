@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block title %} blog {% endblock %} {% block content %}
+{% extends "base.html" %} 
+
+{% block title %} 
+    Blog | _TuxiCode_ Solutions
+{% endblock %} 
+
+{% block content %}
 
 <div class="row">
     <div class="col s12 m12">
@@ -21,7 +27,9 @@
                 </div>
             </div>
         </div>
-        {% endfor %} {% if is_paginated %}
+        {% endfor %} 
+        
+        {% if is_paginated %}
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
@@ -29,15 +37,19 @@
                 {% endif %}
                 <span class="page-current">
                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span> {% if page_obj.has_next %}
-            <a href="/posts?page={{ page_obj.next_page_number }}">next</a> {% endif %}
+                </span> 
+                {% if page_obj.has_next %}
+                    <a href="/posts?page={{ page_obj.next_page_number }}">next</a> 
+                {% endif %}
             </span>
         </div>
         {% endif %}
     </div>
 </div>
 
-{% endblock %} {% block side-content %}
+{% endblock %} 
+
+{% block side-content %}
 
 <div class="section">
     <form action="{% url 'search' %}" method="get">

@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block title %} contact {% endblock %} {% block content %}
+{% extends "base.html" %} 
+
+{% block title %} 
+    Contact | _TuxiCode_ Solutions 
+{% endblock %} 
+
+{% block content %}
 
 <div class="row">
     <div class="col s12 m12">
@@ -9,7 +15,9 @@
     </div>
 </div>
 
-{% endblock %} {% block side-content %}
+{% endblock %} 
+
+{% block side-content %}
 
 <div class="section">
     <form action="{% url 'search' %}" method="get">

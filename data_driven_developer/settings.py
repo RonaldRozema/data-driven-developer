@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'material.frontend',
     'blog.apps.BlogConfig',
     'contact.apps.ContactConfig',
+    'cv.apps.CvConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
