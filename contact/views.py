@@ -20,5 +20,6 @@ class ContactFormView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ContactFormView, self).get_context_data(*args, **kwargs)
+        context['popular_post_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-times_viewed')[:5]
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         return context

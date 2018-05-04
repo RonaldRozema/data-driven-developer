@@ -40,6 +40,7 @@ class PostList(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(PostList, self).get_context_data(*args, **kwargs)
         paginator = Paginator(self.get_queryset(), self.paginate_by)
+        context['popular_post_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-times_viewed')[:5]
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         return context
 
@@ -81,6 +82,7 @@ class ArchiveList(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ArchiveList, self).get_context_data(*args, **kwargs)
+        context['popular_post_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-times_viewed')[:5]
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         context['date'] = date(year=self.kwargs['year'], month=self.kwargs['month'], day=1)
         return context
@@ -99,6 +101,7 @@ class SearchList(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchList, self).get_context_data(*args, **kwargs)
+        context['popular_post_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).order_by('-times_viewed')[:5]
         context['search_result_count'] = self.get_queryset().count();
         context['archive_list'] = Post.objects.filter(is_draft=False, is_removed=False, is_public=True).annotate(month=TruncMonth('publish_date')).values('month').annotate(c=Count('id')).values('month', 'c')
         return context
