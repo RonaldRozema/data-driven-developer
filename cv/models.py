@@ -5,6 +5,7 @@ class Skill(models.Model):
     
     total_percentage = models.IntegerField(default=100)
     mastered_percentage = models.IntegerField(default=0)
+    image = models.ImageField(height_field=200, width_field=200, upload_to="cv/documents/", default='')
 
 
 class Project(models.Model):
@@ -28,3 +29,4 @@ class CvEntry(models.Model):
     skills = models.ManyToManyField(Skill)
     projects = models.ManyToManyField(Project)
     resources = models.ManyToManyField(Resource)
+    image = models.ImageField(upload_to="cv/headshots/", default="")
